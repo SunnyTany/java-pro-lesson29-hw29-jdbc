@@ -1,22 +1,25 @@
 package kolkova_tan;
 
-public class Employee {
-    private int id;
-    private String name;
-    private int age;
-    private String position;
-    private double salary;
+import java.math.BigDecimal;
 
-    // Constructor for creating a new employee (without an ID, since the database will assign one itself)
-    public Employee(String name, int age, String position, double salary) {
+public class Employee {
+    // Спочатку йдуть посилання (references) для кращого memory footprint
+    private String name;
+    private String position;
+    private BigDecimal salary;
+    private Integer id;      // Клас-обгортка замість примітиву
+    private int age;         // Примітив в кінці
+
+    // Конструктор без ID (для створення нових)
+    public Employee(String name, int age, String position, BigDecimal salary) {
         this.name = name;
         this.age = age;
         this.position = position;
         this.salary = salary;
     }
 
-    // Constructor for loading an employee from a database (with a known ID)
-    public Employee(int id, String name, int age, String position, double salary) {
+    // Конструктор з ID (для завантаження з БД)
+    public Employee(Integer id, String name, int age, String position, BigDecimal salary) {
         this.id = id;
         this.name = name;
         this.age = age;
@@ -24,17 +27,23 @@ public class Employee {
         this.salary = salary;
     }
 
-    // Getters and setters
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
+    // Геттери та сеттери
+    public Integer getId() { return id; }
+    public void setId(Integer id) { this.id = id; }
+
     public String getName() { return name; }
     public int getAge() { return age; }
     public String getPosition() { return position; }
-    public double getSalary() { return salary; }
+    public BigDecimal getSalary() { return salary; }
 
     @Override
     public String toString() {
-        return "Employee{" + "id=" + id + ", name='" + name + '\'' + ", age=" + age +
-                ", position='" + position + '\'' + ", salary=" + salary + '}';
+        return "Employee{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                ", position='" + position + '\'' +
+                ", salary=" + salary +
+                '}';
     }
 }
